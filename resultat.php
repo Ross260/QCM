@@ -2,7 +2,7 @@
 
 include "connect.php";
 
-var_dump($_POST);
+// var_dump($_POST);
 
 $score = 0;
 foreach ($_POST as $key => $value) {
