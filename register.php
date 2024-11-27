@@ -1,16 +1,15 @@
 <?php
 
 if(isset($_POST['send'])){
-    session_start();
     $id = mysqli_connect("localhost","root","","qcm");
     $nom = $_POST['name'];
     $mdp = $_POST['mdp'];
     $email = $_POST['email'];
     
-    $req = "INSERT INTO utilisateur (nom,mdp,email) VALUES ('$nom','$mdp','$email')";
+    $req = "INSERT INTO utilisateur(nom,mdp,email) VALUES ('$nom','$mdp','$email')";
     $res = mysqli_query($id,$req);
     echo "<h3>Inscription réussie, connectez vous....";
-   
+    sleep(3);
     header("location:login.php");
 }
 
@@ -39,6 +38,7 @@ if(isset($_POST['send'])){
             display: block;
             margin-bottom: 8px;
         }
+
         .form-container input[type="text"], 
         .form-container input[type="email"],
         .form-container input[type="password"] {

@@ -1,3 +1,61 @@
+
+<?php
+if (isset($_POST['con'])) {
+    
+// Connexion à la base de données avec mysqli
+$id = mysqli_connect("localhost", "root", "", "qcm");
+if (!$id) {
+    die("Erreur de connexion à la base de données : " . mysqli_connect_error());
+}
+
+// Vérifier si le formulaire a été soumis
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = trim($_POST['email']);
+    $mdp = trim($_POST['mdp']);
+
+    // Préparer la requête SQL pour trouver l'utilisateur
+    $sql = "SELECT * FROM utilisateur WHERE email = ?";
+    $stmt = $id->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Vérifier si l'utilisateur existe
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+
+        // Vérifier le mot de passe (hashé)
+        if ($mdp == $user['mdp']) {
+            // Connexion réussie
+            // echo "Bienvenue, " . htmlspecialchars($user['nom']) . "!";
+            echo "connexion reussi";
+            sleep(2);
+            // Vérification des identifiants (exemple simplifié)
+            session_start();
+            $_SESSION['user_name'] = $user["nom"];
+            $_SESSION['user_id'] = $user["id_utilisateur"];
+            // echo $user["id_utilisateur"];
+            
+            header("Location: listeQuestions.php");
+        } else {
+            // Mot de passe incorrect
+            echo " <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            Erreur : mot de passe incorrect.";
+        }
+    } else {
+        // Utilisateur non trouvé
+        echo "Erreur : utilisateur non trouvé.";
+    }
+
+    $stmt->close();
+}
+
+$id->close();
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -21,7 +79,7 @@
             display: block;
             margin-bottom: 8px;
         }
-        .form-container input[type="text"], 
+        .form-container input[type="password"], 
         .form-container input[type="email"] {
             width: 100%;
             padding: 10px;
@@ -47,14 +105,14 @@
 <body>
     <div class="form-container">
         <h2>Connecter vous</h2>
-        <form action="register.php" method="post">
+        <form action="" method="post">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
             
-            <label for="mdp">Email:</label>
+            <label for="mdp">Mot de passe:</label>
             <input type="password" id="mdp" name="mdp" required>
 
-            <input type="submit" name="send" value="Envoyer">
+            <input type="submit" name="con" value="Envoyer">
         </form>
         <br>
         <a href="login.php">Déja un compte</a>

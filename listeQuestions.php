@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+include "but_deco.php";
+
+// Vérifiez que l'utilisateur est connecté
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +19,13 @@
     <title>Document</title>
 </head>
 <body>
+    <p style="font-size: 50px">Salut <?= $_SESSION["user_name"]; ?> 
+    
+        <?php 
+        // echo $_SESSION['user_id'];
+        ?>
+
+    </p>
     <h1>Tentez votre chance </h1><hr>
 
     <form action="resultat.php" method="post">
