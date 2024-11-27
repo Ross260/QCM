@@ -115,7 +115,7 @@ $id->close();
             <input type="submit" name="con" value="Envoyer">
         </form>
         <br>
-        <a href="login.php">Déja un compte</a>
+        <a href="register.php">Créé un compte</a>
     </div>
 </body>
 </html>

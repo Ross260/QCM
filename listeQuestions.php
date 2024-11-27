@@ -9,6 +9,13 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+// Gestion de la visibilité admin
+if ($_SESSION['user_id'] == 1) {
+    echo "<a href='all_scores.php' >
+    <input type='button' style='font-size: 30px; border-radius:20px; background-color:lightgreen;' value='Score des utilisateurs'>
+    </a>";
+}
+
 ?>
 
 <!DOCTYPE html>

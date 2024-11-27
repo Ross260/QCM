@@ -9,7 +9,6 @@ if(isset($_POST['send'])){
     $req = "INSERT INTO utilisateur(nom,mdp,email) VALUES ('$nom','$mdp','$email')";
     $res = mysqli_query($id,$req);
     echo "<h3>Inscription réussie, connectez vous....";
-    sleep(3);
     header("location:login.php");
 }
 

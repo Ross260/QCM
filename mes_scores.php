@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "but_deco.php";
 $conn = mysqli_connect("localhost", "root", "", "qcm");
 
 if (!$conn) {
@@ -41,6 +42,11 @@ $moyenne = $somme / $i;
 
 echo "<h2> Moyenne </h2>";
 echo "La moyenne de vos scores est de <b>".$moyenne."</b>";
+
+
+
+
+
 
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
