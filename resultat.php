@@ -45,6 +45,9 @@ $user_id = $_SESSION['user_id'];
 $sql = "INSERT INTO scores (user_id, score) VALUES (?, ?)";
 $stmt = mysqli_prepare($id, $sql);
 mysqli_stmt_bind_param($stmt, "ii", $user_id, $score);
+    // "ii" signifie :
+    // Le premier i correspond à un entier (user_id).
+    // Le deuxième i correspond à un entier (score).
 
 if (mysqli_stmt_execute($stmt)) {
     echo "<br><br>Score enregistré avec succès !";
@@ -61,8 +64,8 @@ mysqli_close($id);
 <a href="listeQuestions.php">
     <input type="button" style="font-size: 30px; border-radius:20px; background-color:lightgreen;" value="Rejouer">
 </a>
-<a href="moyenne.php">
-    <input type="button" style="font-size: 30px; border-radius:20px; background-color:lightgreen;" value="Afficher la moyenne de mes scores">
+<a href="mes_scores.php">
+    <input type="button" style="font-size: 30px; border-radius:20px; background-color:lightgreen;" value="Afficher mes scores">
 </a>
 <!-- 
 
