@@ -81,5 +81,7 @@ mysqli_close($conn);
             <p>Aucun score enregistré pour cet utilisateur.</p>
         <?php endif; ?>
     <?php endif; ?>
+
+    <a href="listeQuestions.php">Jouer</a>
 </body>
 </html>
